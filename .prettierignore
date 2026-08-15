@@ -1,0 +1,10 @@
+node_modules/
+.npm-cache/
+.electron-cache/
+dist-electron/
+dist-renderer/
+package-lock.json
+PROJECT_SPEC.md
+docs/provider-notes/igdb-contract.md
+docs/provider-notes/mobygames-steam-contract.md
+scripts/*.ps1

@@ -1,0 +1,83 @@
+{
+  "name": "gamescout",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first Windows game discovery desktop application",
+  "productName": "GameScout",
+  "author": "GameScout contributors",
+  "main": "dist-electron/main/main.js",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:renderer": "vite --host 127.0.0.1",
+    "typecheck:renderer": "tsc -p tsconfig.json",
+    "typecheck:electron": "tsc -p tsconfig.electron.json --noEmit",
+    "typecheck:tests": "tsc -p tsconfig.test.json",
+    "typecheck": "npm run typecheck:renderer && npm run typecheck:electron && npm run typecheck:tests",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:e2e": "vitest run tests/e2e",
+    "verify": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run build",
+    "build:electron": "node scripts/clean-electron.mjs && tsc -p tsconfig.electron.json",
+    "build:renderer": "vite build",
+    "build": "npm run build:electron && npm run build:renderer",
+    "package:windows": "npm run verify && electron-builder --win nsis",
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "com.gamescout.desktop",
+    "productName": "GameScout",
+    "artifactName": "GameScout-${version}-Setup.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "dist-renderer/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "GameScout",
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^9.35.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0",
+    "vite": "^7.1.3",
+    "vitest": "^3.2.4"
+  }
+}

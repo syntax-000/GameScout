@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "provider": "steam",
+  "fixtures": [
+    {
+      "id": "steam-online-coop",
+      "app_id": 620,
+      "categories": [{ "id": 38, "description": "Online Co-op" }],
+      "expected": {
+        "capabilities": [
+          { "type": "cooperative", "connection": "online", "count_model": "unknown" }
+        ],
+        "exact_player_count_confirmed": false
+      }
+    },
+    {
+      "id": "steam-local-coop",
+      "app_id": 621,
+      "categories": [{ "id": 39, "description": "Shared/Split Screen Co-op" }],
+      "expected": {
+        "capabilities": [
+          {
+            "type": "cooperative",
+            "connection": "local_device",
+            "count_model": "unknown",
+            "split_screen": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "steam-lan-coop",
+      "app_id": 622,
+      "categories": [{ "id": 48, "description": "LAN Co-op" }],
+      "expected": {
+        "capabilities": [{ "type": "cooperative", "connection": "lan", "count_model": "unknown" }]
+      }
+    },
+    {
+      "id": "steam-online-pvp",
+      "app_id": 623,
+      "categories": [{ "id": 36, "description": "Online PvP" }],
+      "expected": {
+        "capabilities": [{ "type": "pvp", "connection": "online", "count_model": "unknown" }]
+      }
+    },
+    {
+      "id": "steam-generic-category-is-ambiguous",
+      "app_id": 624,
+      "categories": [
+        { "id": 1, "description": "Multi-player" },
+        { "id": 9, "description": "Co-op" }
+      ],
+      "expected": { "capabilities": [] }
+    }
+  ]
+}

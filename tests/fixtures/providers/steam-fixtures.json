@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "provider": "steam",
+  "license": {
+    "source": "Steam Web API",
+    "fixture_policy": "Sanitized DTOs only; current-player values are observations, never capacity evidence."
+  },
+  "fixtures": [
+    {
+      "id": "steam-verified-positive",
+      "app_id": 620,
+      "source_evidence": { "provider": "steam", "external_record_id": "steam-portal-2" },
+      "current_players_response": { "success": 1, "player_count": 952 },
+      "expected": {
+        "external_url": "https://store.steampowered.com/app/620/",
+        "current_player_count": 952,
+        "capacity_binding": "none"
+      }
+    },
+    {
+      "id": "steam-verified-zero",
+      "app_id": 999999991,
+      "source_evidence": { "provider": "steam", "external_record_id": "steam-zero-fixture" },
+      "current_players_response": { "success": 1, "player_count": 0 },
+      "expected": {
+        "external_url": "https://store.steampowered.com/app/999999991/",
+        "current_player_count": 0,
+        "capacity_binding": "none"
+      }
+    },
+    {
+      "id": "steam-missing-association",
+      "app_id": null,
+      "source_evidence": null,
+      "current_players_response": null,
+      "expected": {
+        "external_url": null,
+        "current_player_count": null,
+        "capacity_binding": "none",
+        "state": "unknown"
+      }
+    },
+    {
+      "id": "steam-unavailable-count",
+      "app_id": 999999992,
+      "source_evidence": {
+        "provider": "steam",
+        "external_record_id": "steam-unavailable-fixture"
+      },
+      "current_players_response": { "success": 0, "player_count": null },
+      "expected": {
+        "external_url": "https://store.steampowered.com/app/999999992/",
+        "current_player_count": null,
+        "capacity_binding": "none",
+        "state": "unavailable"
+      }
+    },
+    {
+      "id": "steam-enrichment-failure",
+      "app_id": 999999993,
+      "source_evidence": {
+        "provider": "steam",
+        "external_record_id": "steam-failure-fixture"
+      },
+      "current_players_response": { "success": 0, "player_count": null, "error": "network_error" },
+      "expected": {
+        "external_url": "https://store.steampowered.com/app/999999993/",
+        "current_player_count": null,
+        "capacity_binding": "none",
+        "primary_catalog_rollback": false
+      }
+    }
+  ]
+}
